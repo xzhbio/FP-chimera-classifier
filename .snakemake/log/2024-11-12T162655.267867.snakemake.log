@@ -1,0 +1,34 @@
+host: gpu04
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 52
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job         count
+--------  -------
+all             1
+minimap2        1
+total           2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Nov 12 16:26:55 2024]
+localrule minimap2:
+    input: /public/home/xzh/chimera_anlysis/filt_result_v3/gut/all.fastq.gz, /public/home/xzh/reference/gut.fasta
+    output: test/align.paf
+    jobid: 1
+    reason: Missing output files: test/align.paf
+    wildcards: out_dir=test
+    resources: tmpdir=/tmp
+
+CreateCondaEnvironmentException:
+Conda must be version 24.7.1 or later, found version 4.10.1. Please update conda to the latest version. Note that you can also install conda into the snakemake environment without modifying your main conda installation.
+Removing output files of failed job minimap2 since they might be corrupted:
+test/align.paf
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-11-12T162655.267867.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

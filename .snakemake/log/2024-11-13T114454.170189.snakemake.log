@@ -1,0 +1,39 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 52
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+all                1
+model_check        1
+total              2
+
+Select jobs to execute...
+
+[Wed Nov 13 11:44:59 2024]
+rule model_check:
+    input: test/hairpin.npy
+    output: test/FP-SVs_reads_id.txt
+    log: test/model_check.log
+    jobid: 2
+    reason: Missing output files: test/FP-SVs_reads_id.txt
+    wildcards: out_dir=test
+    resources: tmpdir=/tmp
+
+[Wed Nov 13 11:45:25 2024]
+Finished job 2.
+1 of 2 steps (50%) done
+Select jobs to execute...
+
+[Wed Nov 13 11:45:25 2024]
+localrule all:
+    input: test/align.paf, test/FP-SVs_reads_id.txt
+    jobid: 0
+    reason: Input files updated by another job: test/FP-SVs_reads_id.txt
+    resources: tmpdir=/tmp
+
+[Wed Nov 13 11:45:25 2024]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2024-11-13T114454.170189.snakemake.log
