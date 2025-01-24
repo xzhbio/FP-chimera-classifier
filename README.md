@@ -1,43 +1,49 @@
 # Nanopore sequencing FP-chimera-classifier
-In this repository, we provide a filter method for the FP chimera generated through nanopore sequencing which is using the ligation preparation method.
+This repository provides a deep learning-based filtering method for identifying and removing false positive (FP) chimeras generated during Nanopore sequencing, specifically for data prepared using the ligation method. The tool leverages a ResNet-based model to improve the accuracy of downstream genomic analyses by effectively filtering out chimeric reads.
 
-# Installation
-In this part, we introcduce the installation step for FP-chimera-classifier. We use ```conda``` to manage the computing environment.
-```
-# download the source code
+## Installation
+To set up the FP-chimera-classifier, follow the steps below. We recommend using ```conda``` to manage the computing environment.
+```bash
+# Clone the Repository
 git clone https://github.com/xzhbio/FP-chimera-classifier.git
 
-# enter the directory
+# Navigate to the Directory
 cd FP-SVs-classifier
 
-# install dependencies. Only test on Ubuntu System
+# Set Up the Environment
 conda env create -n FP-chimera-classifier_env -f env.yaml
 ```
 
-# Usage
-The main.py requires several options:
-  1.required: the path of FASTQ file.
-  2.required: the path of reference file.
-  3.required: the path of FAST5 directory
-  4.optional: the path of output directory, default is ```./```
-  5.optional: choose the GPU for process, default is ```0``` (e.g. ```0,1,2``` for 3 GPU)
-  6.optional: choose whether to output potential FP cross and within chimera PAF file.
-  7.required: choose the model used for classifier, ```NA12878``` or ```microbe```.
-```
-usage: main.py [-h] --input INPUT --ref REF --fast5 FAST5 [--output OUTPUT] [--cuda CUDA] [--chimeric] [--model {NA12878,microbe}]
+## Usage
 
-FP-SVs classifier
+The `main.py` script is the core of the FP-chimera-classifier. Below are the required and optional arguments for running the tool.
 
-options:
-  -h, --help            show this help message and exit
-  --input INPUT, -i INPUT
-                        input path of fastq file
-  --ref REF             reference path
-  --fast5 FAST5         fast5 directory path
-  --output OUTPUT, -o OUTPUT
-                        output directory path
-  --cuda CUDA           choose the free GPU
-  --chimeric            If provided, will output cross and within PAF
-  --model {NA12878,microbe}
-                        choose the pretrain model, NA12878 or microbe
+### Command-Line Options
+
+| Argument          | Description                                                                 | Required/Optional |
+|-------------------|-----------------------------------------------------------------------------|-------------------|
+| `--input`, `-i`   | Path to the input FASTQ file.                                               | **Required**      |
+| `--ref`           | Path to the reference genome file.                                          | **Required**      |
+| `--fast5`         | Path to the directory containing FAST5 files.                               | **Required**      |
+| `--output`, `-o`  | Path to the output directory (default: `./`).                               | Optional          |
+| `--cuda`          | Specify the GPU(s) to use (e.g., `0` for GPU 0, `0,1,2` for multiple GPUs). | Optional          |
+| `--chimeric`      | If provided, outputs potential cross- and within-chimera PAF files.         | Optional          |
+| `--model`         | Choose the pre-trained model: `NA12878` or `microbe`.                       | **Required**      |
+
+### Example Command
+
+```bash
+python main.py --input sample.fastq --ref reference.fasta --fast5 fast5_directory --output results --cuda 0 --model NA12878
 ```
+
+###  Pre-Trained Models
+The FP-chimera-classifier provides two pre-trained models:
+  1.NA12878: Optimized for human genomic data.
+  2.Microbe: Designed for microbial genomic data.
+Choose the appropriate model based on your dataset.
+
+## Ootput
+The tool generates the following outputs:
+
+- **Filtered Reads**: A txt file containing FP chimeric reads id.
+- **Chimera PAF Files** (optional): If the `--chimeric` flag is provided, the tool outputs PAF files for potential cross- and within-chimeras.
