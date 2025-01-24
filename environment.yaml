@@ -1,4 +1,4 @@
-name: pytorch_cu11.6
+name: FP-chimera-classifier
 channels:
   - pytorch
   - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
@@ -397,4 +397,3 @@ dependencies:
     - yarl==1.16.0
     - yte==1.5.4
     - zstandard==0.22.0
-prefix: /public/home/xzh/.conda/envs/pytorch_cu11.6
