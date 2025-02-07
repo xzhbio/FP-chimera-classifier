@@ -42,7 +42,7 @@ The FP-chimera-classifier provides two pre-trained models:
   2.Microbe: Designed for microbial genomic data.
 Choose the appropriate model based on your dataset.
 
-## Ootput
+## Output
 The tool generates the following outputs:
 
 - **Filtered Reads**: A txt file containing FP chimeric reads id.
